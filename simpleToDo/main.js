@@ -1,34 +1,5 @@
-// Сегодня напишем самый простой TODO лист без графического интерфейса.
 
-// Хранилищем будет объект, а имена задач - ключами.
-
-// const list = {
-//  "create a task": "In Progress",
-//  "make a bed": "Done",
-//  "write a post": "To Do",
-// }
-
-// Функция changeStatus - будет менять статус задачи
-
-// changeStatus("write a post", "Done")
-
-// Функция addTask - добавляет новую задачу
-
-// addTask('have a walk')
-
-// Функция deleteTask - удаляет задачу
-
-// deleteTask('have a walk')
-
-// Функция showList будет выводить весь список дел в виде
-
-// Todo:
-//  "create a task",
-//  "make a bed",
-// In Progress:
-//  "write a post"
-// Done:
-//  -
+let counterId = 3;
 
 const list = [{
     id: 1,
@@ -44,7 +15,6 @@ const list = [{
   },
 ];
 
-let counterId = 3;
 
 function changeStatus(task, status) {
   list.forEach((item) => {
@@ -71,30 +41,55 @@ function addTask(task, status = "TODO", priority = "high") {
   });
 }
 
-function deleteTask(task) {
+function deleteTask(id) {
   list.forEach((item, index) => {
-    if (item.name === task) {
+    if (item.id === id) {
       list.splice(index, 1);
     }
   });
 }
 
-function showList() {
-  let;
+function showBy(group) {
+  if (group === 'status') {
+
+    let sortedTODO = list.filter(item => item.status === "TODO").map(item => item.name).join(', ');
+    let sortedInPogress = list.filter(item => item.status === "In progress").map(item => item.name).join(', ');
+    let sortedDone = list.filter(item => item.status === "Done").map(item => item.name).join(', ');
+  
+    console.log(`TODO: ${sortedTODO}`);
+    console.log(`In progress: ${sortedInPogress}`);
+    console.log(`Done: ${sortedDone}\n`);
+    
+  } else if (group === 'priority') {
+
+    let priorityHigh = list.filter(item => item.priority === 'high').map(item => item.name).join(', ');
+    let priorityLow = list.filter(item => item.priority === 'low').map(item => item.name).join(', ');
+
+    console.log(`high: ${priorityHigh}`);
+    console.log(`low: ${priorityLow}\n`);
+
+  }
 }
+
+
 
 addTask("go to the gym");
 addTask("have lunch");
 addTask("take a walk");
-addTask("have lunch");
+addTask("read a book");
+addTask("clean the room")
 
 changeStatus("create a post", "In progress");
 changeStatus("take a walk", "Done");
 
-changePriority("create a post", "medium");
+changePriority("create a post", "low");
 
-deleteTask("go to the gym");
-deleteTask("have lunch");
+deleteTask(3);
+deleteTask(4);
 
-console.log(list);
+showBy('status');
+showBy('priority');
+
+
+
 
