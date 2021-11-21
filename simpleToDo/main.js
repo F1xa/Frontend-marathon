@@ -22,10 +22,12 @@ function changeStatus(task, status) {
 }
 
 
+
 function changePriority(task, priority) {
 
   return list.find(item => item.name === task ? item.priority = priority : false);
 }
+
 
 
 function addTask(task, status = "TODO", priority = "high") {
@@ -37,13 +39,14 @@ function addTask(task, status = "TODO", priority = "high") {
   });
 }
 
+
+
 function deleteTask(id) {
-  list.forEach((item, index) => {
-    if (item.id === id) {
-      list.splice(index, 1);
-    }
-  });
+
+  return list.find((item, index) => item.id === id ? list.splice(index, 1) : false);
 }
+
+
 
 function showBy(group) {
 
@@ -88,3 +91,5 @@ deleteTask(4);
 
 showBy('status');
 showBy('priority');
+
+console.log(list)
