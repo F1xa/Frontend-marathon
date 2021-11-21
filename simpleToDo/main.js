@@ -1,4 +1,3 @@
-
 let counterId = 3;
 
 const list = [{
@@ -17,20 +16,17 @@ const list = [{
 
 
 function changeStatus(task, status) {
-  list.forEach((item) => {
-    if (item.name === task) {
-      item.status = status;
-    }
-  });
+
+  return list.find(item => item.name === task ? item.status = status : false);
+
 }
 
+
 function changePriority(task, priority) {
-  list.forEach((item) => {
-    if (item.name === task) {
-      item.priority = priority;
-    }
-  });
+
+  return list.find(item => item.name === task ? item.priority = priority : false);
 }
+
 
 function addTask(task, status = "TODO", priority = "high") {
   list.push({
@@ -50,23 +46,26 @@ function deleteTask(id) {
 }
 
 function showBy(group) {
+
+  function sortedStatus(status) {
+    return list.filter(item => item.status === status).map(item => item.name).join(', ');
+  }
+
+  function sortedPriority(priority) {
+    return list.filter(item => item.priority === priority).map(item => item.name).join(', ');
+  }
+
+
   if (group === 'status') {
 
-    let sortedTODO = list.filter(item => item.status === "TODO").map(item => item.name).join(', ');
-    let sortedInPogress = list.filter(item => item.status === "In progress").map(item => item.name).join(', ');
-    let sortedDone = list.filter(item => item.status === "Done").map(item => item.name).join(', ');
-  
-    console.log(`TODO: ${sortedTODO}`);
-    console.log(`In progress: ${sortedInPogress}`);
-    console.log(`Done: ${sortedDone}\n`);
-    
+    console.log(`TODO: ${sortedStatus("TODO")}`);
+    console.log(`In progress: ${sortedStatus("In progress")}`);
+    console.log(`Done: ${sortedStatus("Done")}\n`);
+
   } else if (group === 'priority') {
 
-    let priorityHigh = list.filter(item => item.priority === 'high').map(item => item.name).join(', ');
-    let priorityLow = list.filter(item => item.priority === 'low').map(item => item.name).join(', ');
-
-    console.log(`high: ${priorityHigh}`);
-    console.log(`low: ${priorityLow}\n`);
+    console.log(`high: ${sortedPriority('high')}`);
+    console.log(`low: ${sortedPriority('low')}\n`);
 
   }
 }
@@ -89,7 +88,3 @@ deleteTask(4);
 
 showBy('status');
 showBy('priority');
-
-
-
-
