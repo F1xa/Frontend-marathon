@@ -1,0 +1,28 @@
+*,
+*::after,
+*::before {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.wrapper {
+  max-width: 364px;
+  padding: 0 20px;
+  margin: 0 auto;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-gap: 16px;
+}
+
+.number-delete {
+  grid-column: 1 / 3;
+}
+
+.number-zero {
+  grid-column: 1 / 4;
+}
