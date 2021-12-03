@@ -58,7 +58,7 @@ body {
   cursor: pointer;
 }
 
-.number-delete {
+.delete-all {
   background: #4E505F;
   grid-column: 1 / 3;
 }
