@@ -1,8 +1,17 @@
-import {btn, inputHight, section} from './view.js'
+import {btn, inputHight, inputLow, sections} from './view.js'
 
+
+
+
+  const addHightTask =  btn[0].addEventListener('click', addTask);
+  const addLowTask =  btn[1].addEventListener('click', addTask);
+
+ 
+  
 
 function addTask() {
-  btn.addEventListener('click', ()=> {
+  
+
     const newBlock = document.createElement('div');
     const label = document.createElement('label');
     const output = document.createElement('span');
@@ -13,8 +22,9 @@ function addTask() {
     btnDelete.className = 'button-del';
   
     output.textContent = inputHight.value;
-    
-    section.after(newBlock);
+    inputHight.value = '';
+    sections.after(newBlock);
+
     newBlock.append(label);
   
     label.insertAdjacentHTML("afterbegin", '<input type="checkbox" class="check-box" name="checkbox">');
@@ -23,14 +33,15 @@ function addTask() {
     
     newBlock.append(btnDelete);
 
-  btnDelete.addEventListener('click', ()=> {
-    newBlock.remove();
-  })
+
+   btnDelete.addEventListener('click', ()=> {
+      newBlock.remove();
+   })
    
-  })
+  
 }
 
-addTask();
+
 
 
 
@@ -139,4 +150,3 @@ addTask();
 // showBy('priority');
 
 // console.log(list)
-
