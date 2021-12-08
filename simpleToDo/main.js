@@ -1,17 +1,10 @@
-import {btn, inputHight, inputLow, sections} from './view.js'
+import {btn, INPUTS, sections} from './view.js'
 
 
+btn.forEach((item, index) => item.addEventListener('click', () => addTask(sections[index], INPUTS[index])))
 
-
-  const addHightTask =  btn[0].addEventListener('click', addTask);
-  const addLowTask =  btn[1].addEventListener('click', addTask);
-
- 
+function addTask(targetSection, inputField) {
   
-
-function addTask() {
-  
-
     const newBlock = document.createElement('div');
     const label = document.createElement('label');
     const output = document.createElement('span');
@@ -21,9 +14,9 @@ function addTask() {
     output.className = 'content';
     btnDelete.className = 'button-del';
   
-    output.textContent = inputHight.value;
-    inputHight.value = '';
-    sections.after(newBlock);
+    output.textContent = inputField.value;
+    inputField.value = '';
+    targetSection.after(newBlock);
 
     newBlock.append(label);
   
@@ -33,12 +26,20 @@ function addTask() {
     
     newBlock.append(btnDelete);
 
+   let checkbox = label.querySelector('.check-box');
+   console.log(checkbox);
+   checkbox.addEventListener('click', () => {
+      newBlock.classList.toggle('checked');
+   })
 
    btnDelete.addEventListener('click', ()=> {
       newBlock.remove();
    })
-   
   
+}
+
+function changeStatus() {
+
 }
 
 
