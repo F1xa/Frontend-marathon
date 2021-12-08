@@ -1,4 +1,3 @@
 export const btn = document.querySelectorAll('.button');
-export const inputHight = document.querySelector('.input-hight');
-export const inputLow = document.querySelector('.input-low');
-export const sections = document.querySelector('.section');
+export const sections = document.querySelectorAll('.section');
+export const INPUTS = document.querySelectorAll('.section > [type="text"]')

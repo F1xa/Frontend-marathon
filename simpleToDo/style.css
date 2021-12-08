@@ -130,6 +130,10 @@ color: #000000;
   transform: rotate(45deg);
 }
 
+.checked {
+  background: #F4F4F4;
+}
+
 .content {
   max-width: 300px;
   margin-left: 20px;
