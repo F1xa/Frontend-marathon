@@ -1,9 +1,22 @@
-import {btn, INPUTS, sections} from './view.js'
+import {BTN, INPUTS, SECTION} from './view.js';
 
 
-btn.forEach((item, index) => item.addEventListener('click', () => addTask(sections[index], INPUTS[index])))
+function addTask() {
 
-function addTask(targetSection, inputField) {
+   BTN.forEach((item, index) => item.addEventListener('click', (event) => {
+   event.preventDefault();
+
+   createTask(SECTION[index], INPUTS[index])
+   }
+ ));
+}
+
+
+function deleteTask(task) {
+   console.log(task)
+};
+
+function createTask(targetSection, inputField) {
   
     const newBlock = document.createElement('div');
     const label = document.createElement('label');
@@ -27,23 +40,20 @@ function addTask(targetSection, inputField) {
     newBlock.append(btnDelete);
 
    let checkbox = label.querySelector('.check-box');
-   console.log(checkbox);
+  
    checkbox.addEventListener('click', () => {
       newBlock.classList.toggle('checked');
    })
 
-   btnDelete.addEventListener('click', ()=> {
-      newBlock.remove();
-   })
+   // btnDelete.addEventListener('click', ()=> {
+   //    newBlock.remove();
+   // })
   
 }
 
-function changeStatus() {
 
-}
-
-
-
+addTask();
+deleteTask(createTask());
 
 
 
