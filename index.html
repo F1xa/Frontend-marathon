@@ -4,40 +4,65 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./style.css">
   <title>weather</title>
 </head>
 <body>
-  <div class="wrapper">
-    <div class="search">
-      <input type="text" class="input">
-      <button type="button">
-        <img src="img-search" alt="search">
-      </button>
-    </div>
-    <div class="weather">
-      <div class="weather__content">
+  <main class="main">
+    <div class="wrapper">
+      <div class="search">
+        <input type="text" class="input" placeholder="Aktobe">
+        <button type="button" class="button">
+          <img src="./assets/img/search.svg" class="search-img" alt="search">
+        </button>
+      </div>
+      <div class="container">
+        <div class="weather">
+          <div class="weather__content">
+            <div class="weather__content__item" id="item1">
+              <div class="weather__degree">
+                <p>14</p>
+                <span>&deg</span>
+              </div>
+              <div class="weather__img">
+                <img src="./assets/img/icons-cloud.png" alt="cloud-img">
+              </div>
+              <div class="weather__city">
+                <p class="locations__city">Aktobe</p>
+                <img src="./assets/img/Shape.svg" alt="Shape-img">
+              </div>
+            </div>
 
+            <!-- <div class="weather__content__item" id="item2"></div>
+            <div class="weather__content__item" id="item3"></div> -->
+          </div>
+          <div class="buttons__tabs">
+            <button type="button" class="weather__button active">Now</button>
+            <button type="button" class="weather__button">Details</button>
+            <button type="button" class="weather__button">Forecast</button>
+          </div>
+        </div>
+        <div class="locations">
+          <div class="added__locations">
+            <p>Added Locations:</p>
+          </div>
+          <div class="locations__list">
+              <p class="locations__city">Amur</p>
+              <p class="locations__city">Samara</p>
+              <p class="locations__city">Bali</p>
+              <p class="locations__city">Dane</p>
+              <p class="locations__city">Kilo</p>
+              <p class="locations__city">Nur-Sultan</p>
+          </div>
+        </div>
       </div>
-      <button type="button" class="weather__button">Now</button>
-      <button type="button" class="weather__button">Details</button>
-      <button type="button" class="weather__button">Forecast</button>
-    </div>
-    <div class="locations">
-      <div class="added__locations">
-        <p>Added Locations:</p>
-      </div>
-      <div class="locations__list">
-        <p class="locations__city">Amur</p>
-          <p class="locations__city">Samara</p>
-          <p class="locations__city">Bali</p>
-          <p class="locations__city">Dane</p>
-          <p class="locations__city">Kilo</p>
-          <p class="locations__city">Nur-Sultan</p>
-      </div>
-    </div>
-  </div>
-
+      
+    </div>  
+  </main>
+  
 
   <script src="./main.js"></script>
 </body>
