@@ -2,9 +2,6 @@ const BUTTONS_TABS = document.querySelectorAll('.weather__button');
 const TABS = document.querySelectorAll('.weather__content__item');
 
 
-
-
-
 BUTTONS_TABS.forEach((button, index) => {
 
   button.addEventListener('click', ()=> {

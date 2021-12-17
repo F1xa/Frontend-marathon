@@ -7,32 +7,32 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="style.css">
   <title>weather</title>
 </head>
 <body>
   <main class="main">
     <div class="wrapper">
-      <div class="search">
-        <input type="text" class="input" placeholder="Aktobe">
-        <button type="button" class="button">
+      <form class="search">
+          <input type="text" class="input" placeholder="Add city">
+        <button class="button">
           <img src="./assets/img/search.svg" class="search-img" alt="search">
         </button>
-      </div>
+      </form>
       <div class="container">
         <div class="weather">
           <div class="weather__content__list">
             <div class="weather__content__item active"  id="item1">
               <div class="weather__content">
                 <div class="weather__temperature__now">
-                  <p>14</p>
+                  <p class="current_temperature">14</p>
                   <span>&deg</span>
                 </div>
                 <div class="weather__img__now">
                   <img src="./assets/img/icons-cloud.png" alt="cloud-img">
                 </div>
                 <div class="weather__city__now">
-                  <p class="locations__city">Aktobe</p>
+                  <p class="locations__city city"></p>
                   <img src="./assets/img/Shape.svg" alt="Shape-img">
                 </div>
               </div>
