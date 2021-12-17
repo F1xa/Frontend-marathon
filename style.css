@@ -10,6 +10,8 @@
 body {
   background: #E5E5E5;
   font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: normal;
 }
 
 .main {
@@ -71,11 +73,15 @@ body {
   border-left: 0;
 }
 
-.weather__content {
+.weather__content__list {
   height: 345px;
 }
 
 .weather__content__item {
+  display: none;
+}
+
+.weather__content {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -104,10 +110,14 @@ body {
   cursor: pointer;
 }
 
-.active {
+button.active {
   display: block;
   background: #000000;
   color: #FFFFFF;
+}
+
+.weather__content__item.active {
+  display: block;
 }
 
 .weather__button:last-child {
@@ -116,6 +126,11 @@ body {
 
 .weather__button:hover {
   background: #e1dbdb;
+}
+
+.weather__button:focus {
+  background: #000000;
+  color: #FFFFFF
 }
 
 .added__locations {
@@ -145,36 +160,58 @@ body {
   line-height: 28px;
 }
 
-.weather__degree {
+.weather__temperature__now {
   display: flex;
   padding-top: 20px;
   padding-left: 23px;
 }
 
-.weather__degree p {
+.weather__temperature__now p {
   font-style: normal;
   font-weight: normal;
   font-size: 70px;
   line-height: 82px;
 }
 
-.weather__degree span {
+.weather__temperature__now span {
   font-style: normal;
   font-weight: normal;
   font-size: 70px;
   line-height: 82px;
 }
 
-.weather__img {
+.weather__img__now {
   display: flex;
   justify-content: center;
   padding-bottom: 40px;
 }
 
-.weather__city {
+.weather__city__now {
   padding-left: 12px;
   padding-right: 26px;
   padding-bottom: 17px;
   display: flex;
   justify-content: space-between;
+}
+
+.weather__city__details {
+  padding-top: 28px;
+  padding-left: 17px;
+}
+
+.weather__content__details {
+  height: 345px;
+}
+
+.weather__temperature__details {
+  padding-top: 42px;
+  padding-left: 15px;
+}
+
+.details-indicators {
+  padding: 5px 0;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 28px;
 }
