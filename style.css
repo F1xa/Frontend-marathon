@@ -148,16 +148,25 @@ button.active {
 }
 
 .locations__list {
-  padding-top: 33px;
-  padding-left: 18px;
+  height: 300px;
+  padding: 33px 15px 0 18px;
+  overflow: auto;
 }
 
 .locations__city {
+  display: flex;
+  justify-content: space-between;
   padding-top: 10px;
   font-style: normal;
   font-weight: normal;
   font-size: 24px;
   line-height: 28px;
+  cursor: pointer;
+}
+
+.locations__city:hover {
+  cursor: pointer;
+  opacity: 0.5;
 }
 
 .weather__temperature__now {
@@ -194,6 +203,13 @@ button.active {
   justify-content: space-between;
 }
 
+.button-heart, .button-close {
+  border: none;
+  outline: none;
+  background: transparent;
+  cursor: pointer;
+}
+
 .weather__city__details {
   padding-top: 28px;
   padding-left: 17px;
@@ -214,4 +230,8 @@ button.active {
   font-weight: normal;
   font-size: 24px;
   line-height: 28px;
+}
+
+.image-heart {
+  filter: invert(15%) sepia(95%) saturate(5892%) hue-rotate(2deg) brightness(97%) contrast(119%);
 }

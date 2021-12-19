@@ -1,3 +1,13 @@
+
+export const UI = {
+   BUTTON_SEARCH : document.querySelector(".button"),
+   INPUT : document.querySelector(".input"),
+   TEMP_INDICATOR : document.querySelector(".current_temperature"),
+   CITY : document.querySelector(".city"),
+   BUTTON_HEARTH : document.querySelector('.button-heart'),
+   locationList : document.querySelector('.locations__list'),
+}
+
 const BUTTONS_TABS = document.querySelectorAll('.weather__button');
 const TABS = document.querySelectorAll('.weather__content__item');
 
