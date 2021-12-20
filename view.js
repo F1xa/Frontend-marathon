@@ -8,6 +8,7 @@ export const UI = {
    locationList : document.querySelector('.locations__list'),
 }
 
+
 const BUTTONS_TABS = document.querySelectorAll('.weather__button');
 const TABS = document.querySelectorAll('.weather__content__item');
 
