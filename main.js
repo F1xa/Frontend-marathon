@@ -1,44 +1,52 @@
 import { UI } from "./view.js";
 
-const serverUrl = "http://api.openweathermap.org/data/2.5/weather";
-const apiKey = "f660a2fb1e4bad108d6160b7f58c555f";
+const SERVER_URL = "http://api.openweathermap.org/data/2.5/weather";
+const API_KEY = "f660a2fb1e4bad108d6160b7f58c555f";
 
 UI.BUTTON_SEARCH.addEventListener("click", (e) => {
   e.preventDefault();
 
   getWeather(UI.INPUT.value);
+  
 });
 
 function getWeather(cityName) {
-  const urlWeater = `${serverUrl}?q=${cityName}&appid=${apiKey}&units=metric`;
-
+  const urlWeater = `${SERVER_URL}?q=${cityName}&appid=${API_KEY}&units=metric`;
   const promiseWeater = fetch(urlWeater);
 
+  
   UI.INPUT.value = "";
 
   promiseWeater
     .then((response) => response.json())
     .then((city) => {
       UI.TEMP_INDICATOR.textContent = city.main.temp.toFixed(0);
-      UI.CITY.textContent = city.name;
+      UI.CITY_TAB.textContent = city.name;
     })
     .catch((err) => {
-      UI.CITY.textContent = "";
-      UI.TEMP_INDICATOR.textContent = 0;
       alert((err.massage = "Error: there is no such city"));
     });
 }
 
-function addCityList() {
+
+UI.BUTTON_HEARTH.addEventListener("click", () => {
+  const isNoteValidCity = UI.CITY_TAB.textContent === 'City';
+
+  if (isNoteValidCity) {
+    return false;
+  }
+  createCity();
+});
+
+function createCity() {
   const locationCity = document.createElement("div");
   const deleteButton = document.createElement("button");
-  const imageHeart = document.querySelector(".button-heart > img");
 
   locationCity.className = "locations__city";
   deleteButton.className = "button-close";
-  imageHeart.classList.toggle("image-heart");
+  UI.IMAGE_HEART.classList.toggle("image-heart");
 
-  locationCity.textContent = UI.CITY.textContent;
+  locationCity.textContent = UI.CITY_TAB.textContent;
 
   deleteButton.insertAdjacentHTML(
     "afterbegin",
@@ -46,29 +54,38 @@ function addCityList() {
   );
   locationCity.append(deleteButton);
   
-  getCityName(locationCity.innerText);
+  addCityToTheList(locationCity);
   
-  //UI.locationList.prepend(locationCity);
-
 }
 
-function getCityName(CityName) {
+
+function addCityToTheList(City) {
+  const CityName = City.innerText;
   const arrayLocationList = Array.from(UI.locationList.children);
-  const getCity = arrayLocationList.find((city) => city.innerText === CityName);
-  console.log(locationCity)
-  return (typeof getCity === 'undefined') ? UI.locationList.prepend(locationCity) : false;
-  //this.arrayLocationList.remove()
+  const foundCity = arrayLocationList.find((city) => city.innerText === CityName);
+
+  if (!foundCity) {
+    UI.locationList.prepend(City);
+    
+  } else {
+    foundCity.remove();
+  }
+ 
+  
+  City.addEventListener('click', ()=> {
+    getWeather(City.textContent)
+  })
 }
 
-UI.BUTTON_HEARTH.addEventListener("click", () => {
-  addCityList();
-  UI.BUTTON_HEARTH.addEventListener("click", () => {
-    this.locationCity.remove();
-  });
-});
 
-// function deleteCityList() {
-//   UI.BUTTON_HEARTH.addEventListener('click', ()=> {
-//     console.log(UI.locationcity)
-//   })
-// }
+
+UI.CITIES.forEach(city => {
+city.addEventListener('click', ()=> {
+  console.log(city.textContent)
+  getWeather(city.textContent);
+
+})
+})
+
+
+

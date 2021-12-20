@@ -3,9 +3,11 @@ export const UI = {
    BUTTON_SEARCH : document.querySelector(".button"),
    INPUT : document.querySelector(".input"),
    TEMP_INDICATOR : document.querySelector(".current_temperature"),
-   CITY : document.querySelector(".city"),
+   CITY_TAB : document.querySelector(".city"),
+   CITIES : document.querySelectorAll('.locations__city'),
    BUTTON_HEARTH : document.querySelector('.button-heart'),
    locationList : document.querySelector('.locations__list'),
+   IMAGE_HEART : document.querySelector(".button-heart > img"),
 }
 
 
