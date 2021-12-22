@@ -8,6 +8,7 @@ export const UI = {
    BUTTON_HEARTH : document.querySelector('.button-heart'),
    locationList : document.querySelector('.locations__list'),
    IMAGE_HEART : document.querySelector(".button-heart > img"),
+   IMAGE_TAB : document.querySelector(".weather__img__now > img")
 }
 
 
