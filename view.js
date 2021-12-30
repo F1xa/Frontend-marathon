@@ -2,18 +2,31 @@
 export const UI = {
    BUTTON_SEARCH : document.querySelector(".button"),
    INPUT : document.querySelector(".input"),
-   TEMP_INDICATOR : document.querySelector(".current_temperature"),
-   CITY_TAB : document.querySelector(".city"),
+
+   FavoriteList : document.querySelector('.locations__list'),
    CITIES : document.querySelectorAll('.locations__city'),
-   BUTTON_HEARTH : document.querySelector('.button-heart'),
-   locationList : document.querySelector('.locations__list'),
-   IMAGE_HEART : document.querySelector(".button-heart > img"),
-   IMAGE_TAB : document.querySelector(".weather__img__now > img")
+
+   NOW : {
+    TEMP_INDICATOR : document.querySelector(".current_temperature"),
+    IMAGE : document.querySelector(".weather__img__now > img"),
+    CITY : document.querySelector(".city"),
+    IMAGE_HEART : document.querySelector(".button-heart > img"),
+    BUTTON_HEARTH : document.querySelector('.button-heart'),
+  },
+   
 }
 
 
+export const API = {
+  SERVER_URL : "http://api.openweathermap.org/data/2.5/weather",
+  API_KEY : "f660a2fb1e4bad108d6160b7f58c555f",
+}
+
+
+
+
 const BUTTONS_TABS = document.querySelectorAll('.weather__button');
-const TABS = document.querySelectorAll('.weather__content__item');
+const DISPLAY_TABS = document.querySelectorAll('.weather__content__item');
 
 
 BUTTONS_TABS.forEach((button, index) => {
@@ -24,15 +37,17 @@ BUTTONS_TABS.forEach((button, index) => {
       item.classList.remove('active')
     });
 
-    TABS.forEach(item => {
+    DISPLAY_TABS.forEach(item => {
       item.classList.remove('active')
     });
 
-    TABS[index].classList.add('active');
+    DISPLAY_TABS[index].classList.add('active');
     button.classList.add('active');
 
   })
 })
+
+
 
 
 
