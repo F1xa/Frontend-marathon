@@ -73,8 +73,11 @@ body {
   border-left: 0;
 }
 
-.weather__content__list {
+.weather__content__list,
+.weather__content__details,
+.weather__content__forecast {
   height: 345px;
+  overflow: auto;
 }
 
 .weather__content__item {
@@ -150,7 +153,7 @@ button.active {
 .locations__list {
   height: 300px;
   padding: 33px 15px 0 18px;
-  overflow: auto;
+  overflow-x: auto;
 }
 
 .locations__city, 
@@ -204,20 +207,23 @@ button.active {
   justify-content: space-between;
 }
 
-.button-heart, .button-close {
+.button-heart, 
+.button-close {
   border: none;
   outline: none;
   background: transparent;
   cursor: pointer;
 }
 
-.weather__city__details {
-  padding-top: 28px;
-  padding-left: 17px;
+.button-close:hover {
+  transform: rotate(90deg);
+  transition: 0.2s;
 }
 
-.weather__content__details {
-  height: 345px;
+.weather__city__details,
+.weather__city__forecast {
+  padding-top: 28px;
+  padding-left: 17px;
 }
 
 .weather__temperature__details {
@@ -236,3 +242,37 @@ button.active {
 .image-heart {
   filter: invert(15%) sepia(95%) saturate(5892%) hue-rotate(2deg) brightness(97%) contrast(119%);
 }
+
+.weather__forecast__block {
+  width: 265px;
+  height: 120px;
+  border: 1px solid #000000;
+  margin-top: 7px;
+  margin-left: 10px;
+}
+
+.block__time {
+  padding: 8px 12px 0 8px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.block__time > p,
+.block__temp > p,
+.block__feels > p{
+  font-size: 18px;
+  line-height: 21px;
+}
+
+.block__temp {
+  padding: 30px 12px 0 8px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.block__feels {
+  padding: 0 12px 0 8px;
+  display: flex;
+  justify-content: space-between;
+}
+

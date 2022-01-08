@@ -17,11 +17,17 @@ function getWeather(cityName) {
   fetch(urlWeater)
     .then((response) => response.json())
     .then((result) => {
+      
       const data = {
         temp: result.main.temp.toFixed(0),
         city: result.name,
         image: result.weather[0].icon,
+        feels_like: result.main.feels_like.toFixed(0),
+        weather: result.weather[0].main,
+        sunrise: result.sys.sunrise,
+        sunset: result.sys.sunset,
       };
+
       storage.saveCurrentCity(data);
 
       addDataCurrentCity();
@@ -31,25 +37,36 @@ function getWeather(cityName) {
 }
 
 function addCityStorageList() {
-  const storagetData = storage.getCurrentCity();
+  const storageData = storage.getCurrentCity();
   const storageList = storage.getFavoriteCities();
   const isNoteValidList =
-    storageList === null || !storageList.includes(storagetData.city);
+    storageList === null || !storageList.includes(storageData.city);
 
   if (isNoteValidList) {
-    storage.saveFavoriteCities(storagetData.city);
+    storage.saveFavoriteCities(storageData.city);
   } else {
     UI.NOW.IMAGE_HEART.classList.add("image-heart");
     return;
   }
 }
 
+
 function addDataCurrentCity() {
   const storageData = storage.getCurrentCity();
+
   UI.NOW.TEMP_INDICATOR.textContent = storageData.temp;
   UI.NOW.IMAGE.src = `http://openweathermap.org/img/wn/${storageData.image}@2x.png`;
   UI.NOW.CITY.textContent = storageData.city;
+
+  UI.DETAILS.CITY.textContent = storageData.city;
+  UI.DETAILS.TEMP_INDICATOR.textContent = `Temperature: ${storageData.temp}°`;
+  UI.DETAILS.FEELS_LIKE.textContent = `Feels like: ${storageData.feels_like}°`;
+  UI.DETAILS.WEATHER.textContent = `Weather: ${storageData.weather}`;
+  UI.DETAILS.SUNRISE.textContent = `Sunrise: ${storageData.sunrise}`;
+  UI.DETAILS.SUNSET.textContent = `Sunset: ${storageData.sunset}`
 }
+
+
 
 function createTemplate(cityName) {
   return `<div class="locations__city">
@@ -60,70 +77,38 @@ function createTemplate(cityName) {
         </div>`;
 }
 
+
+
 function test() {
   const storageList = storage.getFavoriteCities();
 
   storageList.forEach((city) => {
-    console.log(city);
     UI.FavoriteList.innerHTML += createTemplate(city);
   });
 }
 
 test();
 
-UI.NOW.BUTTON_HEARTH.addEventListener("click", () => {
-  // const currentCity = TABS.NOW.CITY.textContent;
-  const isNoteValidCity = TABS.NOW.CITY.textContent === "City";
 
-  if (isNoteValidCity) {
+
+UI.NOW.BUTTON_HEARTH.addEventListener("click", () => {
+
+  const isNoteValidCity = UI.NOW.CITY.textContent === "City";
+  const checkImageHeartClass = UI.NOW.IMAGE_HEART.classList.contains("image-heart")
+
+  if (isNoteValidCity || checkImageHeartClass) {
     return false;
   }
+  UI.FavoriteList.innerHTML += createTemplate(UI.NOW.CITY.textContent)
+  UI.NOW.IMAGE_HEART.classList.add("image-heart");
 
-  // storage.arrayFavoriteList.push(currentCity);
-  // storage.saveFavoriteCity(currentCity);
-
-  //const filteredFavoriteList = !storage.arrayFavoriteList.filter(city => city === currentCity);
 });
 
-// function createCity() {
-//   const locationCity = document.createElement("div");
-//   const deleteButton = document.createElement("button");
 
-//   locationCity.className = "locations__city";
-//   deleteButton.className = "button-close";
-//   UI.IMAGE_HEART.classList.toggle("image-heart");
 
-//   locationCity.textContent = NOW.UI.CITY.textContent;
+UI.FavoriteList.addEventListener("click", (e) => {
 
-//   deleteButton.insertAdjacentHTML(
-//     "afterbegin",
-//     '<img src="./assets/img/close-icon.svg" alt="close-icon">'
-//   );
-//   locationCity.append(deleteButton);
-//   console.log(locationCity)
+  const targetCity = e.target;
+  getWeather(targetCity.textContent)
 
-//   addCityToTheList(locationCity);
-//   addCityStorage(locationCity);
-// }
-
-// function addCityToTheList(сity) {
-//   const CityName = сity.innerText;
-//   const arrayFavoriteList = Array.from(UI.LOCATION_LIST.children);
-//   const foundCity = arrayFavoriteList.find((city) => city.innerText === CityName);
-
-//    localStorage.setItem('FavoriteList', JSON.stringify(UI.FavoriteList))
-
-//   (!foundCity) ? UI.LOCATION_LIST.prepend(сity) : foundCity.remove();
-
-//   for (let city of UI.LOCATION_LIST.children) {
-//     city.addEventListener('click', ()=> {
-//       getWeather(city.textContent)
-//     })
-
-// }}
-
-// function addCityStorage(city) {
-//   const cityName = city.innerText;
-//   StorageCityList.push(cityName)
-//   localStorage.setItem('citis', JSON.stringify(StorageCityList))
-// }
+})

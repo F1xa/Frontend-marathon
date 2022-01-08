@@ -11,9 +11,17 @@ export const UI = {
     IMAGE : document.querySelector(".weather__img__now > img"),
     CITY : document.querySelector(".city"),
     IMAGE_HEART : document.querySelector(".button-heart > img"),
-    BUTTON_HEARTH : document.querySelector('.button-heart'),
+    BUTTON_HEARTH : document.querySelector(".button-heart"),
   },
    
+  DETAILS : {
+    CITY : document.querySelector(".weather__city__details > .city"),
+    TEMP_INDICATOR : document.querySelector(".details-temp"),
+    FEELS_LIKE : document.querySelector(".details-feels"),
+    WEATHER : document.querySelector(".details-weather"),
+    SUNRISE : document.querySelector(".details-sunrise"),
+    SUNSET : document.querySelector(".details-sunset"),
+  }
 }
 
 
