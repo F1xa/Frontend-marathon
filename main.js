@@ -1,6 +1,7 @@
 import { UI, API } from "./view.js";
 import { storage } from "./storage.js";
 
+
 UI.BUTTON_SEARCH.addEventListener("click", (e) => {
   e.preventDefault();
   const currentCity = UI.INPUT.value;
@@ -10,6 +11,8 @@ UI.BUTTON_SEARCH.addEventListener("click", (e) => {
   UI.INPUT.value = "";
   UI.NOW.IMAGE_HEART.classList.remove("image-heart");
 });
+
+
 
 function getWeather(cityName) {
   const urlWeater = `${API.SERVER_URL}?q=${cityName}&appid=${API.API_KEY}&units=metric`;
@@ -31,23 +34,9 @@ function getWeather(cityName) {
       storage.saveCurrentCity(data);
 
       addDataCurrentCity();
-      addCityStorageList();
+      
     })
     .catch(alert);
-}
-
-function addCityStorageList() {
-  const storageData = storage.getCurrentCity();
-  const storageList = storage.getFavoriteCities();
-  const isNoteValidList =
-    storageList === null || !storageList.includes(storageData.city);
-
-  if (isNoteValidList) {
-    storage.saveFavoriteCities(storageData.city);
-  } else {
-    UI.NOW.IMAGE_HEART.classList.add("image-heart");
-    return;
-  }
 }
 
 
@@ -71,44 +60,68 @@ function addDataCurrentCity() {
 function createTemplate(cityName) {
   return `<div class="locations__city">
               ${cityName}
-            <button class="button-close">
-              <img src="./assets/img/close-icon.svg" alt="close-icon">
-            </button>
+            <button class="button-close"></button>
         </div>`;
 }
 
 
 
-function test() {
+function fillFavoriteList() {
   const storageList = storage.getFavoriteCities();
-
-  storageList.forEach((city) => {
-    UI.FavoriteList.innerHTML += createTemplate(city);
-  });
+  
+  if (storageList) {
+    storageList.forEach((city) => {
+      UI.FavoriteList.innerHTML += createTemplate(city);
+      UI.NOW.IMAGE_HEART.classList.add("image-heart");
+    });
+  }
 }
 
-test();
+fillFavoriteList();
 
 
 
 UI.NOW.BUTTON_HEARTH.addEventListener("click", () => {
+  const storageList = storage.getFavoriteCities();
+  const storageData = storage.getCurrentCity();
 
   const isNoteValidCity = UI.NOW.CITY.textContent === "City";
-  const checkImageHeartClass = UI.NOW.IMAGE_HEART.classList.contains("image-heart")
+  const checkImageHeartClass = UI.NOW.IMAGE_HEART.classList.contains("image-heart");
 
   if (isNoteValidCity || checkImageHeartClass) {
     return false;
   }
-  UI.FavoriteList.innerHTML += createTemplate(UI.NOW.CITY.textContent)
-  UI.NOW.IMAGE_HEART.classList.add("image-heart");
 
+  const isNoteValidList = (storageList === null || !storageList.includes(storageData.city));
+
+  if (isNoteValidList) {
+    storage.saveFavoriteCity(storageData.city)
+  } else {
+    UI.NOW.IMAGE_HEART.classList.add("image-heart");
+    return;
+  }
+  
+  UI.FavoriteList.innerHTML += createTemplate(storageData.city)
+  UI.NOW.IMAGE_HEART.classList.add("image-heart");
 });
 
 
 
 UI.FavoriteList.addEventListener("click", (e) => {
-
   const targetCity = e.target;
-  getWeather(targetCity.textContent)
+  const storageList = storage.getFavoriteCities();
+  
+  if (targetCity.classList.contains("button-close")) {
 
+    storage.saveFavorits(storageList.filter(city => city !== targetCity.parentNode.innerText))
+
+    targetCity.parentNode.remove();
+
+    UI.NOW.IMAGE_HEART.classList.remove("image-heart");
+  } else 
+
+  
+  getWeather(targetCity.innerText);
+  
 })
+

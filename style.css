@@ -207,12 +207,20 @@ button.active {
   justify-content: space-between;
 }
 
-.button-heart, 
-.button-close {
+.button-heart {
   border: none;
   outline: none;
   background: transparent;
   cursor: pointer;
+}
+
+.button-close {
+  width: 17px;
+  height: 16px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background: url('./assets/img/close-icon.svg') no-repeat;
 }
 
 .button-close:hover {

@@ -1,13 +1,18 @@
 
 export const storage = {
-  arrayFavoriteList : [],
-
-  saveFavoriteCities(currentCity) {
-    this.arrayFavoriteList.push(currentCity)
-    localStorage.setItem('cities', JSON.stringify(storage.arrayFavoriteList));
+  
+  saveFavorits(citiesList) {
+    localStorage.setItem('cities', JSON.stringify(citiesList));
   },
+
+  saveFavoriteCity(currentCity) {
+    let storageList = storage.getFavoriteCities();
+    storageList.push(currentCity);
+    localStorage.setItem('cities', JSON.stringify(storageList));
+  },
+
   getFavoriteCities() {
-    return JSON.parse(localStorage.getItem('cities'));
+    return JSON.parse(localStorage.getItem('cities') || '[]');
   },
 
   saveCurrentCity(currentCity) {
@@ -17,5 +22,5 @@ export const storage = {
   getCurrentCity() {
     return JSON.parse(localStorage.getItem('currentCity'))
   },
+  
 };
-
