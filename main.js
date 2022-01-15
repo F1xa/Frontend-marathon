@@ -71,14 +71,15 @@ function fillFavoriteList() {
   
   if (storageList) {
     storageList.forEach((city) => {
+
       UI.FavoriteList.innerHTML += createTemplate(city);
       UI.NOW.IMAGE_HEART.classList.add("image-heart");
+
     });
   }
 }
 
 fillFavoriteList();
-
 
 
 UI.NOW.BUTTON_HEARTH.addEventListener("click", () => {
@@ -92,7 +93,7 @@ UI.NOW.BUTTON_HEARTH.addEventListener("click", () => {
     return false;
   }
 
-  const isNoteValidList = (storageList === null || !storageList.includes(storageData.city));
+  const isNoteValidList = (!storageList.includes(storageData.city));
 
   if (isNoteValidList) {
     storage.saveFavoriteCity(storageData.city)
@@ -111,8 +112,10 @@ UI.FavoriteList.addEventListener("click", (e) => {
   const targetCity = e.target;
   const storageList = storage.getFavoriteCities();
   
-  if (targetCity.classList.contains("button-close")) {
+  UI.NOW.IMAGE_HEART.classList.add("image-heart");
 
+  if (targetCity.classList.contains("button-close")) {
+   
     storage.saveFavorits(storageList.filter(city => city !== targetCity.parentNode.innerText))
 
     targetCity.parentNode.remove();
@@ -125,3 +128,7 @@ UI.FavoriteList.addEventListener("click", (e) => {
   
 })
 
+
+if (UI.NOW.CITY.textContent === "City") {
+  UI.NOW.IMAGE_HEART.classList.remove("image-heart");
+ }

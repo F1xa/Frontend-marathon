@@ -6,9 +6,9 @@ export const storage = {
   },
 
   saveFavoriteCity(currentCity) {
-    let storageList = storage.getFavoriteCities();
-    storageList.push(currentCity);
-    localStorage.setItem('cities', JSON.stringify(storageList));
+    const favoriteCities = new Set(storage.getFavoriteCities());
+    favoriteCities.add(currentCity)
+    localStorage.setItem('cities', JSON.stringify([...favoriteCities]))
   },
 
   getFavoriteCities() {
@@ -24,3 +24,4 @@ export const storage = {
   },
   
 };
+
