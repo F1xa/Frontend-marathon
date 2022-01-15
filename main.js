@@ -1,46 +1,20 @@
-import { UI, API } from "./view.js";
+import { UI } from "./view.js";
 import { storage } from "./storage.js";
+import { createData, getWeather } from "./api.js";
 
 
 UI.BUTTON_SEARCH.addEventListener("click", (e) => {
   e.preventDefault();
   const currentCity = UI.INPUT.value;
 
-  getWeather(currentCity);
+  getWeather(currentCity, saveUpdateWeather);
 
   UI.INPUT.value = "";
   UI.NOW.IMAGE_HEART.classList.remove("image-heart");
 });
 
 
-
-function getWeather(cityName) {
-  const urlWeater = `${API.SERVER_URL}?q=${cityName}&appid=${API.API_KEY}&units=metric`;
-
-  fetch(urlWeater)
-    .then((response) => response.json())
-    .then((result) => {
-      
-      const data = {
-        temp: result.main.temp.toFixed(0),
-        city: result.name,
-        image: result.weather[0].icon,
-        feels_like: result.main.feels_like.toFixed(0),
-        weather: result.weather[0].main,
-        sunrise: result.sys.sunrise,
-        sunset: result.sys.sunset,
-      };
-
-      storage.saveCurrentCity(data);
-
-      addDataCurrentCity();
-      
-    })
-    .catch(alert);
-}
-
-
-function addDataCurrentCity() {
+function updateTabs() {
   const storageData = storage.getCurrentCity();
 
   UI.NOW.TEMP_INDICATOR.textContent = storageData.temp;
@@ -55,6 +29,12 @@ function addDataCurrentCity() {
   UI.DETAILS.SUNSET.textContent = `Sunset: ${storageData.sunset}`
 }
 
+updateTabs()
+
+function saveUpdateWeather(weather) {
+  storage.saveCurrentCity(new createData(weather));
+  updateTabs();
+};
 
 
 function createTemplate(cityName) {
@@ -124,7 +104,7 @@ UI.FavoriteList.addEventListener("click", (e) => {
   } else 
 
   
-  getWeather(targetCity.innerText);
+  getWeather(targetCity.innerText, saveUpdateWeather);
   
 })
 

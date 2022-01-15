@@ -25,14 +25,6 @@ export const UI = {
 }
 
 
-export const API = {
-  SERVER_URL : "http://api.openweathermap.org/data/2.5/weather",
-  API_KEY : "f660a2fb1e4bad108d6160b7f58c555f",
-}
-
-
-
-
 const BUTTONS_TABS = document.querySelectorAll('.weather__button');
 const DISPLAY_TABS = document.querySelectorAll('.weather__content__item');
 
