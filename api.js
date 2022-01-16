@@ -1,7 +1,8 @@
 
 export const API = {
-  SERVER_URL : "http://api.openweathermap.org/data/2.5/weather",
-  API_KEY : "f660a2fb1e4bad108d6160b7f58c555f",
+  NOW : "http://api.openweathermap.org/data/2.5/weather",
+  FORECAST: "https://api.openweathermap.org/data/2.5/forecast",
+  API_KEY : "07c965802dbd021a52da8f792cfe263d",
 }
 
  export function createData(data) {
@@ -15,7 +16,7 @@ export const API = {
 }
 
 export function getWeather(cityName, callback) {
-  const urlWeater = `${API.SERVER_URL}?q=${cityName}&appid=${API.API_KEY}&units=metric`;
+  const urlWeater = `${API.NOW}?q=${cityName}&appid=${API.API_KEY}&units=metric`;
 
   fetch(urlWeater)
     .then((response) => response.json())
