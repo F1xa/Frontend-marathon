@@ -1,3 +1,4 @@
+import { format } from 'date-fns';
 
 export const API = {
   NOW : "http://api.openweathermap.org/data/2.5/weather",
@@ -10,9 +11,9 @@ export const API = {
   this.city = data.name;
   this.image = data.weather[0].icon;
   this.feels_like = data.main.feels_like.toFixed(0);
-  this.weather = data.weather[0].main;
-  this.sunrise = data.sys.sunrise;
-  this.sunset = data.sys.sunset;
+  this.weather = data.weather[0].main; 
+  this.sunrise = format(new Date(data.sys.sunrise * 1000), 'HH:mm');
+  this.sunset = format(new Date(data.sys.sunset * 1000), 'HH:mm');
 }
 
 export function getWeather(cityName, callback) {
